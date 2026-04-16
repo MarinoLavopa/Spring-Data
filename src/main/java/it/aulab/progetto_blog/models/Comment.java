@@ -1,4 +1,6 @@
-package it.aulab.spring_data.models;
+package it.aulab.progetto_blog.models;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -20,13 +22,14 @@ public class Comment {
     private String email;
     @Column(nullable=false, length=200)
     private String body;
-    @Column(nullable=true, length=8)
+    @Column(nullable=true, length=10)
     private String date;
 
     
 
     @ManyToOne
     @JoinColumn(name="post_id", nullable=false)
+    @JsonIgnoreProperties({"comments"})
     private Post post;
 
     public Comment() {

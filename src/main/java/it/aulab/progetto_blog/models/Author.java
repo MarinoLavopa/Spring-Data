@@ -1,7 +1,9 @@
-package it.aulab.spring_data.models;
+package it.aulab.progetto_blog.models;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
@@ -13,6 +15,7 @@ import jakarta.persistence.Table;
 
 @Entity
 @Table(name="authors")
+// @JsonIgnoreProperties({"id"})
 public class Author {
     @Id
     @GeneratedValue(strategy=GenerationType.IDENTITY)
@@ -28,6 +31,7 @@ public class Author {
     private String email;
 
     @OneToMany(mappedBy="author")
+    @JsonIgnoreProperties({"author"}) // per evitare il loop diciamo a Author di ignorare author nei singoli post
     private List<Post>posts= new ArrayList<Post>();
 
     public Author() {

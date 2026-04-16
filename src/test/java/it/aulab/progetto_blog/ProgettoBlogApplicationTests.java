@@ -1,4 +1,4 @@
-package it.aulab.spring_data;
+package it.aulab.progetto_blog;
 
 import static org.assertj.core.api.Assertions.assertThat;
 import org.junit.jupiter.api.BeforeEach;
@@ -8,13 +8,13 @@ import org.springframework.boot.data.jpa.test.autoconfigure.DataJpaTest;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase;
 import org.springframework.boot.jdbc.test.autoconfigure.AutoConfigureTestDatabase.Replace;
 
-import it.aulab.spring_data.models.Author;
-import it.aulab.spring_data.repositories.AuthorRepository;
+import it.aulab.progetto_blog.models.Author;
+import it.aulab.progetto_blog.repositories.AuthorRepository;
 
 // @SpringBootTest
 @DataJpaTest
 @AutoConfigureTestDatabase(replace =Replace.NONE)
-class SpringDataApplicationTests {
+class ProgettoBlogApplicationTests {
 
 	@Autowired
 	AuthorRepository authorRepository;

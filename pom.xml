@@ -9,9 +9,9 @@
 		<relativePath/> <!-- lookup parent from repository -->
 	</parent>
 	<groupId>it.aulab</groupId>
-	<artifactId>spring-data</artifactId>
+	<artifactId>progetto-blog</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>spring-data</name>
+	<name>progetto-blog</name>
 	<description/>
 	<url/>
 	<licenses>
