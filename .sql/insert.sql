@@ -1,21 +1,21 @@
--- INSERT INTO authors(firstname,lastname,email)
--- value("Mario","Rossi","mariorossi@test.it");
+INSERT INTO authors(firstname,lastname,email)
+value("Mario","Rossi","mariorossi@test.it");
 
--- INSERT INTO authors(firstname,lastname,email)
--- value("Giuseppe","Verdi","giuseppeverdi@test.it");
+INSERT INTO authors(firstname,lastname,email)
+value("Giuseppe","Verdi","giuseppeverdi@test.it");
 
 
--- INSERT INTO posts(title,body,publish_date,author_id)
--- SELECT 'Lorem ipsum....','Ciao sono Mario', '2020-01-01',id
--- FROM authors
--- WHERE firstname = 'Mario'
--- and lastname = 'Rossi';
+INSERT INTO posts(title,body,publish_date,author_id)
+SELECT 'Lorem ipsum....','Ciao sono Mario', '2020-01-01',id
+FROM authors
+WHERE firstname = 'Mario'
+and lastname = 'Rossi';
 
--- INSERT INTO posts(title,body,publish_date,author_id)
--- SELECT 'Lorem ipsum....','Amo la pizza', '2020-01-01' ,id
--- FROM authors
--- WHERE firstname = 'Mario'
--- and lastname = 'Rossi';
+INSERT INTO posts(title,body,publish_date,author_id)
+SELECT 'Lorem ipsum....','Amo la pizza', '2020-01-01' ,id
+FROM authors
+WHERE firstname = 'Mario'
+and lastname = 'Rossi';
 
 
 INSERT INTO comments(email,body,date,post_id)
