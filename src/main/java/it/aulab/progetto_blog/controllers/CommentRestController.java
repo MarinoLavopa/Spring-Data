@@ -21,8 +21,8 @@ import it.aulab.progetto_blog.repositories.CommentRepository;
 
 
 @RestController // @Controller + @ResponseBody
-@RequestMapping("/comments") // prefisso dell URI sarà /comments
-public class CommentController {
+@RequestMapping("/api/comments") // prefisso dell URI sarà /comments
+public class CommentRestController {
     @Autowired
     CommentRepository commentRepository;
 

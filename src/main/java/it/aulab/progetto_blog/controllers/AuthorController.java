@@ -1,64 +1,46 @@
 package it.aulab.progetto_blog.controllers;
 
-import java.util.List;
-
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.web.bind.annotation.DeleteMapping;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.PutMapping;
-import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
-import org.springframework.web.server.ResponseStatusException;
 
 import it.aulab.progetto_blog.models.Author;
-import it.aulab.progetto_blog.models.Post;
-import it.aulab.progetto_blog.repositories.AuthorRepository;
+import it.aulab.progetto_blog.services.AuthorService;
 
 
-@RestController // equivale a @Controller + @ResponseBody
-@RequestMapping("/authors")  // prefisso dei suoi URI sarà /authors
+
+
+@Controller
+@RequestMapping("/authors") // nome theplate presente nella cartella templates
 public class AuthorController {
+
     @Autowired
-    AuthorRepository authorRepository;
+    AuthorService authorService;
 
     @GetMapping
-    public List<Author> getAllAuthors(){
-        return authorRepository.findAll();
+    public String index(Model viewModel) {
+        viewModel.addAttribute("title", "Authors"); // titolo della pagina web (themeplate engine+ server side rendering)
+        viewModel.addAttribute("authors", authorService.readAll()); // lista di autori da passare al themeplate
+        return "authors"; //nome themeplate presente nella cartella templates
     }
 
-    @GetMapping("{id}")
-    public Author getAuthor(@PathVariable("id") Long id){
-        return authorRepository.findById(id).get();
+    @GetMapping("create")
+    public String createAuthorView(Model viewModel) {
+        viewModel.addAttribute("title","Create Author"); //titolo pagina web
+        viewModel.addAttribute("author", new Author());                 // istanzia un nuovo autore
+        return "createAuthor";
     }
+    
 
-    @PostMapping // equivalente a @RequestMapping(method=RequestMethod.POST)
-    public Author createAuthor(@RequestBody Author author){
-        return authorRepository.save(author);
+    @PostMapping
+    public String createAuthor(@ModelAttribute("author") Author author){   // ModelAttribute dice al metodo di catturare l'attributo "author" dal form 
+        authorService.create(author);                                      //per memorizzare il nuovo dato interroghiamo sempre il Service ed il metodo create
+        return "redirect:/authors";                                        // Reindirizza alla pagina /authors
     }
-
-    @PutMapping("{id}") // abbiamo modificato Giuseppe Verdi in Giuseppe Garibaldi
-    public Author updateAuthor(@PathVariable("id") Long id, @RequestBody Author author){
-        author.setId(id);
-        return authorRepository.save(author);
-    }
-
-    @DeleteMapping("{id}") // eliminiamo Giuseppe Garibaldi
-    public void deleteAuthor(@PathVariable("id") Long id){
-        //metodo if per controllare se l'aiutore esiste lo eliminiamo, altrimenti lanciamo il messaggio di errore.
-        if(authorRepository.existsById(id)){
-            Author author= authorRepository.findById(id).get();
-            List<Post> authorPosts= author.getPosts();
-            for(Post post: authorPosts){ // per ogni post che ha l'author, settiamo l'author a null per distaccare(sganciare) l'autore dal post e poterlo eliminare.
-                post.setAuthor(null);
-            }
-            authorRepository.deleteById(id);
-        }else{
-            throw new ResponseStatusException(HttpStatus.NOT_FOUND, "Author not found");
-        }
-    }
-
+    
+    
 }
