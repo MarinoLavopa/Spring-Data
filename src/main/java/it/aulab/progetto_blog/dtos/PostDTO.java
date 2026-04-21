@@ -1,6 +1,7 @@
 package it.aulab.progetto_blog.dtos;
 
 public class PostDTO {
+    private Long id;
     private String authorName;
     private String authorSurname;
     private String title;
@@ -48,5 +49,13 @@ public class PostDTO {
 
     public void setPublishDate(String publishDate) {
         this.publishDate = publishDate;
+    }
+
+    public Long getId() {
+        return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 }
